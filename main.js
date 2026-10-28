@@ -7,6 +7,7 @@ logos.after(copy);
 // Journalism & Innovation tabs swap the copy in the dark card
 const impactText = document.getElementById('impact-panel');
 const tabs = [...document.querySelectorAll('.tab')];
+const impactPhotos = [...document.querySelectorAll('.impact__photo')];
 let journalismScroll = null; // set in initMotion when the section is pinned
 
 function setActiveTab(index) {
@@ -16,6 +17,7 @@ function setActiveTab(index) {
     t.classList.toggle('is-active', t === tab);
     t.setAttribute('aria-selected', t === tab);
   });
+  impactPhotos.forEach((photo, i) => photo.classList.toggle('is-active', i === index));
   swapImpactText(tab.dataset.text);
 }
 
@@ -222,7 +224,7 @@ function initMotion() {
     reveal(el);
     gsap.timeline({ scrollTrigger: onEnter(el) })
       .fromTo(el, { clipPath: 'inset(100% 0% 0% 0% round 20px)' }, { clipPath: 'inset(0% 0% 0% 0% round 20px)', duration: 1.4, ease: 'power4.inOut' })
-      .from(el, { scale: 1.2, duration: 1.8, ease }, 0);
+      .from(el.querySelector('.is-active') || el, { scale: 1.2, duration: 1.8, ease, clearProps: 'transform' }, 0);
   });
 
   /* ---------- Stats count up ---------- */

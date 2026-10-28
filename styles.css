@@ -419,13 +419,26 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .stat dt { font-size: 48px; color: var(--yellow); }
 .stat dd { font-size: 16px; line-height: 1.1074; color: var(--white); }
-.impact__photo {
+.impact__media {
+  position: relative;
   width: 613px;
   height: 537px;
   flex-shrink: 0;
   border-radius: 20px;
-  object-fit: cover;
+  overflow: hidden;
 }
+/* one photo per tab, crossfaded by main.js toggling .is-active */
+.impact__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.7s ease, transform 1.4s ease;
+}
+.impact__photo.is-active { opacity: 1; transform: scale(1); }
 
 /* ---------- Publications ---------- */
 .publications {
@@ -583,7 +596,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .journalism__body { flex-direction: column; gap: 40px; margin-left: 0; }
   .tabs { flex-direction: row; width: auto; gap: 32px; }
   .impact { width: 100%; }
-  .impact__photo { width: 50%; }
+  .impact__media { width: 50%; }
 }
 
 @media (max-width: 900px) {
@@ -597,7 +610,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .programme--tall { gap: 20px; }
   .tabs { flex-direction: column; gap: 24px; }
   .impact { flex-direction: column; }
-  .impact__photo { width: 100%; height: 320px; }
+  .impact__media { width: 100%; height: 320px; }
   .publications { height: auto; padding: 48px 0 48px 24px; }
   .publications__heading { padding-right: 24px; }
   .footer__inner { flex-direction: column; }
