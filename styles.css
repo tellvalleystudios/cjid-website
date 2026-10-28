@@ -263,8 +263,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   flex-shrink: 0;
   width: 57px;
   height: 57px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
   background: var(--black);
+  color: rgba(255, 255, 255, 0.65); /* softened white so the icons don't overpower the cards */
+  font-size: 22px;
 }
 .programme__text {
   display: flex;
@@ -327,12 +331,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   width: 57px;
   height: 57px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--button);
   color: var(--black);
   font-size: 24px;
   transition: transform 0.2s;
 }
 .learn-more:hover .learn-more__btn { transform: translateX(4px); }
+.learn-more h3 { color: var(--yellow); }
 
 /* ---------- Journalism & Innovation ---------- */
 .journalism {
