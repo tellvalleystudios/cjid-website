@@ -43,6 +43,98 @@ function swapImpactText(text) {
       { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'power3.out' });
 }
 
+// Featured publications carousel: one dot per card, auto-advances and loops forward.
+// The cards are followed by aria-hidden copies, so after the last card the track keeps
+// moving on to (a copy of) the first, then silently jumps back to the real first card.
+const pubTrack = document.querySelector('.pub-track');
+const pubCards = [...pubTrack.children];
+pubCards.forEach(card => {
+  const copy = card.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  copy.querySelectorAll('a, button').forEach(el => el.setAttribute('tabindex', '-1'));
+  pubTrack.append(copy);
+});
+const pubLoopStart = () => pubTrack.children[pubCards.length].offsetLeft; // where the copies begin
+const pubDotsWrap = document.querySelector('.pub-dots');
+const PUB_INTERVAL = 5000; // ms between auto-advances
+let pubIndex = 0;
+let pubTimer = null;
+let pubInView = false;
+let pubHovered = false;
+let pubAutoScrolling = false;
+let pubAutoScrollTimer;
+
+const pubDots = pubCards.map((card, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'pub-dot';
+  dot.setAttribute('role', 'tab');
+  dot.setAttribute('aria-label', `Show publication ${i + 1} of ${pubCards.length}`);
+  dot.addEventListener('click', () => { goToPub(i); restartPubTimer(); });
+  pubDotsWrap.append(dot);
+  return dot;
+});
+
+function markPubDot(index) {
+  pubIndex = index;
+  pubDots.forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === index);
+    dot.setAttribute('aria-selected', i === index);
+  });
+}
+
+// Scroll to a card; index === pubCards.length means "the copy of the first card"
+function goToPub(index) {
+  const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const target = pubTrack.children[index];
+  pubAutoScrolling = true; // don't let scroll syncing flicker the dots mid-glide
+  clearTimeout(pubAutoScrollTimer);
+  pubAutoScrollTimer = setTimeout(() => { pubAutoScrolling = false; wrapPubLoop(); }, smooth ? 900 : 0);
+  pubTrack.scrollTo({ left: target.offsetLeft, behavior: smooth ? 'smooth' : 'auto' });
+  markPubDot(index % pubCards.length);
+}
+
+// Once we're resting on the copies, jump back by one loop length (looks identical)
+function wrapPubLoop() {
+  const loop = pubLoopStart();
+  if (pubTrack.scrollLeft >= loop - 2) {
+    pubTrack.style.scrollSnapType = 'none';
+    pubTrack.scrollLeft -= loop;
+    pubTrack.style.scrollSnapType = '';
+  }
+}
+
+// Keep the dots in sync (and wrap the loop) when people swipe or scroll the track themselves
+let pubSettleTimer;
+pubTrack.addEventListener('scroll', () => {
+  if (pubAutoScrolling) return;
+  clearTimeout(pubSettleTimer);
+  pubSettleTimer = setTimeout(() => {
+    wrapPubLoop();
+    const all = [...pubTrack.children];
+    let nearest = 0;
+    all.forEach((card, i) => {
+      if (Math.abs(card.offsetLeft - pubTrack.scrollLeft) < Math.abs(all[nearest].offsetLeft - pubTrack.scrollLeft)) nearest = i;
+    });
+    markPubDot(nearest % pubCards.length);
+  }, 120);
+});
+
+function restartPubTimer() {
+  clearInterval(pubTimer);
+  pubTimer = null;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Only auto-advance while the section is on screen, the tab is visible and nobody is hovering
+  if (reduced || !pubInView || pubHovered || document.hidden) return;
+  pubTimer = setInterval(() => goToPub(pubIndex + 1), PUB_INTERVAL);
+}
+
+['pointerenter', 'focusin'].forEach(e => pubTrack.addEventListener(e, () => { pubHovered = true; restartPubTimer(); }));
+['pointerleave', 'focusout'].forEach(e => pubTrack.addEventListener(e, () => { pubHovered = false; restartPubTimer(); }));
+document.addEventListener('visibilitychange', restartPubTimer);
+new IntersectionObserver(([entry]) => { pubInView = entry.isIntersecting; restartPubTimer(); }, { threshold: 0.4 })
+  .observe(pubTrack);
+markPubDot(0);
+
 // Hero focus word cycles through CJID's areas of work
 const focus = document.querySelector('.hero__focus');
 const focusWords = focus.dataset.words.split('|');

@@ -458,13 +458,32 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .publications__heading { margin-top: 32px; padding-right: 55px; }
 
 .pub-track {
+  position: relative; /* offset parent for the carousel maths in main.js */
   display: flex;
   gap: 14px;
   margin-top: 60px;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 .pub-track::-webkit-scrollbar { display: none; }
+.pub { scroll-snap-align: start; }
+
+.pub-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.pub-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: width 0.35s ease, background-color 0.35s ease;
+}
+.pub-dot:hover { background: rgba(0, 0, 0, 0.4); }
+.pub-dot.is-active { width: 28px; background: var(--black); }
 
 .pub {
   display: flex;
@@ -525,7 +544,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin: 45px 0 0 -3px;
+  margin: 28px 0 0 -3px;
   padding: 6px 8px;
   border-radius: 20px;
   background: var(--button);
