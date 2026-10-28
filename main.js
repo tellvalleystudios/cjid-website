@@ -6,14 +6,24 @@ logos.after(copy);
 
 // Journalism & Innovation tabs swap the copy in the dark card
 const impactText = document.getElementById('impact-panel');
-document.querySelectorAll('.tab').forEach(tab => {
+const tabs = [...document.querySelectorAll('.tab')];
+let journalismScroll = null; // set in initMotion when the section is pinned
+
+function setActiveTab(index) {
+  const tab = tabs[index];
+  if (tab.classList.contains('is-active')) return;
+  tabs.forEach(t => {
+    t.classList.toggle('is-active', t === tab);
+    t.setAttribute('aria-selected', t === tab);
+  });
+  swapImpactText(tab.dataset.text);
+}
+
+tabs.forEach((tab, i) => {
   tab.addEventListener('click', () => {
-    if (tab.classList.contains('is-active')) return;
-    document.querySelectorAll('.tab').forEach(t => {
-      t.classList.toggle('is-active', t === tab);
-      t.setAttribute('aria-selected', t === tab);
-    });
-    swapImpactText(tab.dataset.text);
+    // While pinned, a click scrolls to that tab's step so scroll and tabs stay in sync
+    if (journalismScroll) journalismScroll(i);
+    else setActiveTab(i);
   });
 });
 
@@ -171,7 +181,7 @@ function initMotion() {
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true,
-        refreshPriority: 1, // measure first so triggers further down include the pin spacing
+        refreshPriority: 2, // measure pins first (top to bottom) so triggers below include the pin spacing
       },
     })
       .fromTo(whatHeading, { opacity: 0.1 }, { opacity: 1, ease: 'none', duration: 0.6 }, 0)
@@ -183,6 +193,24 @@ function initMotion() {
   });
   mm.add('(max-width: 900px)', () => {
     gsap.from(grid.children, { autoAlpha: 0, y: 50, duration: 1, stagger: 0.12, ease, scrollTrigger: onEnter(grid) });
+  });
+
+  /* ---------- Journalism & Innovation: pinned, scroll steps through the tabs ---------- */
+  mm.add('(min-width: 901px)', () => {
+    const section = document.querySelector('.journalism');
+    const STEP = 500; // scroll distance per tab
+    const st = ScrollTrigger.create({
+      trigger: section,
+      // Short enough to fit: centre it. Taller: pin by its bottom so the tabs and card stay in view.
+      start: () => (section.offsetHeight < innerHeight ? 'center center' : 'bottom bottom'),
+      end: () => '+=' + STEP * tabs.length,
+      pin: true,
+      refreshPriority: 1,
+      invalidateOnRefresh: true,
+      onUpdate: self => setActiveTab(Math.min(tabs.length - 1, Math.floor(self.progress * tabs.length))),
+    });
+    journalismScroll = i => lenis.scrollTo(st.start + STEP * (i + 0.5), { duration: 1.2 });
+    return () => { journalismScroll = null; };
   });
 
   gsap.utils.toArray('[data-anim="stagger-x"]').forEach(el => {
