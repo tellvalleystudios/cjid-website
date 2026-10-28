@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CJID — Centre for Journalism Innovation and Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Montserrat:wght@400;700&family=Nunito:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Hide animated elements until GSAP takes over (skipped for reduced motion)
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('has-anim');
+  </script>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <video class="hero__video" src="assets/hero-bg.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+
+    <nav class="nav" aria-label="Main" data-anim="hero-nav">
+      <a href="#" class="nav__logo"><img src="assets/cjid-logo.svg" width="122" height="39" alt="CJID"></a>
+      <ul class="nav__menu">
+        <li><a href="#" class="nav__link is-active">Home</a></li>
+        <li><a href="#" class="nav__link">About</a></li>
+        <li><button class="nav__link" aria-haspopup="true">Programmes <i class="fa-solid fa-chevron-down"></i></button></li>
+        <li><button class="nav__link" aria-haspopup="true">Opportunities <i class="fa-solid fa-chevron-down"></i></button></li>
+        <li><button class="nav__link" aria-haspopup="true">Media &amp; Events <i class="fa-solid fa-chevron-down"></i></button></li>
+        <li><button class="nav__link" aria-haspopup="true">Resource Hub <i class="fa-solid fa-chevron-down"></i></button></li>
+        <li><a href="#" class="nav__cta">Contact Us <span><i class="fa-solid fa-arrow-right"></i></span></a></li>
+      </ul>
+    </nav>
+
+    <div class="hero__content">
+      <div class="hero__eyebrow" data-anim="hero-eyebrow">
+        <p class="hero__focus" data-words="Research|Media Innovation|Tool Development|Civic Technology|Capacity Building|Grant Making|Events &amp; Convening|Institutional Support">Media Innovation</p>
+        <img src="assets/stars.svg" width="114" height="18" alt="">
+      </div>
+      <h1 class="hero__title" data-anim="hero-title">We are a technology and knowledge-producing think tank that supports &amp; empowers the African media</h1>
+    </div>
+
+    <div class="partners" data-anim="hero-partners">
+      <div class="partners__label">
+        <img src="assets/divider-line.svg" width="45" height="1" alt="">
+        <span>Our partneres</span>
+        <img src="assets/divider-line.svg" width="45" height="1" alt="">
+      </div>
+      <div class="partners__viewport">
+      <div class="partners__track">
+      <ul class="partners__logos">
+        <li class="partner"><img src="assets/partner-01.png" alt="" class="cover"></li>
+        <li class="partner"><img src="assets/partner-02.png" alt=""></li>
+        <li class="partner"><span class="partner__bg" style="background:#af2240"></span><img src="assets/partner-03.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-04.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-05.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-06.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-07.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-08.png" alt="" class="cover"></li>
+        <li class="partner"><img src="assets/partner-09.png" alt="" class="cover"></li>
+        <li class="partner"><img src="assets/partner-10.png" alt=""></li>
+        <li class="partner"><span class="partner__bg" style="background:#e74533"></span><img src="assets/partner-11.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-12.png" alt=""></li>
+        <li class="partner"><img src="assets/partner-13.png" alt="" class="cover"></li>
+        <li class="partner"><img src="assets/partner-14.png" alt="" class="cover"></li>
+        <li class="partner"><img src="assets/partner-15.png" alt=""></li>
+      </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- What we do -->
+    <section class="section what">
+      <span class="pill" data-anim="fade-up">What We Do</span>
+      <h2 class="heading what__heading">We break information barriers and strengthen African democracies through research and media innovation.</h2>
+
+      <div class="programmes" data-anim="fan">
+        <article class="programme programme--cream" style="grid-area:a" data-fan="dubawa">
+          <span class="programme__icon"></span>
+          <div class="programme__text">
+            <h3>Dubawa</h3>
+            <p>Foremost indigenous fact-checking, verification and media literacy platform to combat disinformation, misinformation and other forms of information disorder.</p>
+          </div>
+        </article>
+
+        <article class="programme programme--tall" style="grid-area:b">
+          <div class="programme__top">
+            <span class="programme__icon"></span>
+            <div class="programme__text">
+              <h3>DAIDAC</h3>
+              <p>We collect, analyse, and disseminate information in support of intelligence gathering for sound decision-making processes, and for political and economic risk management.</p>
+            </div>
+          </div>
+          <a href="#" class="learn-more">
+            <img src="assets/photo-event.png" alt="" class="learn-more__bg">
+            <div class="programme__text">
+              <h3>Learn More</h3>
+              <p>We leverage our capabilities and resources in sustaining and building reliable democracies across Africa</p>
+            </div>
+            <span class="learn-more__btn"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </article>
+
+        <article class="programme programme--cream" style="grid-area:c" data-fan="udeme">
+          <span class="programme__icon"></span>
+          <div class="programme__text">
+            <h3>UDEME</h3>
+            <p>A premiere social accountability project to track Zonal Intervention Projects and constituency projects across the region.</p>
+          </div>
+        </article>
+
+        <article class="programme" style="grid-area:d" data-fan="audio">
+          <span class="programme__icon"></span>
+          <div class="programme__text">
+            <h3>Dubawa Audio Platform</h3>
+            <p>AI-powered audio platform for analysing audio files, particularly in regards to monitoring radio shows in Africa.</p>
+          </div>
+        </article>
+
+        <article class="programme" style="grid-area:e" data-fan="press">
+          <span class="programme__icon"></span>
+          <div class="programme__text">
+            <h3>The Press Attack Tracker</h3>
+            <p>The Press Attack Tracker is a platform to track and report attacks on the Press in Nigeria.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Journalism & Innovation -->
+    <section class="section journalism">
+      <span class="pill" data-anim="fade-up">What We Do</span>
+      <h2 class="heading heading--center" data-anim="lines">Journalism &amp; Innovation</h2>
+      <p class="journalism__intro" data-anim="lines">We build democratic accountability and strengthen journalism in Africa through sustainable media franchises and high-impact programmes.<br>We leverage our capabilities and resources in sustaining and building reliable democracies across Africa</p>
+
+      <div class="journalism__body">
+        <ul class="tabs" role="tablist" data-anim="stagger">
+          <li><button class="tab is-active" role="tab" aria-selected="true" aria-controls="impact-panel" data-text="We curate programmes and initiatives that set the agenda for democracy by going directly to the nooks and cranny of where the people reside to interact and report on the true needs and want of the people.">Journalism <i class="fa-solid fa-arrow-right"></i></button></li>
+          <li><button class="tab" role="tab" aria-selected="false" aria-controls="impact-panel" data-text="We leverage modern technology in scaling and developing the reach and impact of journalism across the sub region by curating services and initiatives that propel innovation.">Innovation <i class="fa-solid fa-arrow-right"></i></button></li>
+          <li><button class="tab" role="tab" aria-selected="false" aria-controls="impact-panel" data-text="We act as a watchdog for democracy and holding those in power accountable to their commitments to the people through public reporting and tracking of government activities.">Accountability &amp; Development <i class="fa-solid fa-arrow-right"></i></button></li>
+        </ul>
+
+        <div class="impact" data-anim="fade-up">
+          <div class="impact__info">
+            <p class="impact__text" id="impact-panel" role="tabpanel" aria-live="polite">We curate programmes and initiatives that set the agenda for democracy by going directly to the nooks and cranny of where the people reside to interact and report on the true needs and want of the people.</p>
+            <dl class="stats">
+              <div class="stat"><dt data-count>11</dt><dd>African countries</dd></div>
+              <div class="stat"><dt data-count>150+</dt><dd>Workshops &amp; Events</dd></div>
+              <div class="stat"><dt data-count>3,000+</dt><dd>Journalists &amp; Researchers trained</dd></div>
+            </dl>
+          </div>
+          <img src="assets/photo-event.png" alt="Participants at a CJID event" class="impact__photo" data-anim="reveal-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured publications -->
+    <section class="publications">
+      <span class="pill pill--white" data-anim="fade-up">Featured Publications</span>
+      <h2 class="heading publications__heading" data-anim="lines">We deepen the development discourse in the media and tackle Information disorder, thereby enabling media that advances the values of democracy.</h2>
+
+      <div class="pub-track" data-anim="stagger-x">
+        <article class="pub">
+          <div class="pub__cover">
+            <img src="assets/photo-event.png" alt="">
+            <img src="assets/pub-cover-1.png" alt="">
+          </div>
+          <div class="pub__body">
+            <div class="pub__meta">
+              <time datetime="2026-10-23">October 23, 2026</time>
+              <h3>Digital Harms in Nigeria: What 21 Investigations Reveal About Platform Accountability</h3>
+              <p><strong>Authors:</strong> Akintunde Babatunde . Oluwapelumi Oginni . Tracy Keshi</p>
+            </div>
+            <a href="#" class="pub__btn" aria-label="Read publication"><i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub__cover">
+            <img src="assets/photo-event.png" alt="">
+            <img src="assets/pub-cover-1.png" alt="">
+          </div>
+          <div class="pub__body">
+            <div class="pub__meta">
+              <time datetime="2026-10-23">October 23, 2026</time>
+              <h3>Digital Harms in Nigeria: What 21 Investigations Reveal About Platform Accountability</h3>
+              <p><strong>Authors:</strong> Akintunde Babatunde . Oluwapelumi Oginni . Tracy Keshi</p>
+            </div>
+            <a href="#" class="pub__btn" aria-label="Read publication"><i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub__cover">
+            <img src="assets/photo-event.png" alt="">
+            <img src="assets/pub-cover-1.png" alt="">
+            <img src="assets/pub-cover-2.png" alt="">
+          </div>
+          <div class="pub__body">
+            <div class="pub__meta">
+              <time datetime="2026-10-23">October 23, 2026</time>
+              <h3>Nigeria’s Off Cycle Election: Lessons for 2027</h3>
+              <p>Authors Akintunde Babatunde Oluwapelumi Oginni Tracy Keshi</p>
+            </div>
+            <a href="#" class="pub__btn" aria-label="Read publication"><i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <a href="#" class="see-more" data-anim="fade-up">See more Publications <span><i class="fa-solid fa-arrow-right"></i></span></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner" data-anim="fade-up">
+      <div class="footer__brand">
+        <img src="assets/cjid-logo-footer.svg" width="122" height="39" alt="CJID">
+        <p>Centre for Journalism Innovation and Development.</p>
+      </div>
+      <address class="footer__contact">
+        <strong>CONTACT</strong>
+        <span>53 Mambolo Street, Zone 2, Wuse, Abuja<br><a href="https://www.thecjid.org">www.thecjid.org</a></span>
+      </address>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 Centre for Journalism Innovation and Development. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
